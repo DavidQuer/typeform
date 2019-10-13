@@ -133,14 +133,14 @@ The problem with this solution is that needs a lot of development and monitoring
 
 ### typeform : deployment achitecture: with spark
 
-Depending on batch or real-time setup we could use **Airflow** as a spark job launcher.
+For the batch layer setup we could use **Airflow** or **Luigi** as a spark job launcher.
+
+![alt text](https://github.com/DavidQuer/typeform/blob/master/images/aws-spark.png "")
 
 
 ### typeform : deployment achitecture: third party solution
 
-Another way to do it can be to externalize all datascience and analytics infraestructure to a service like AWS SageMaker.
-
-https://aws.amazon.com/es/sagemaker/
+Another way to do it can be to externalize all datascience and analytics infraestructure to a service like AWS SageMaker. https://aws.amazon.com/es/sagemaker
 
 ### typeform : deployment achitecture: monitoring system
 
