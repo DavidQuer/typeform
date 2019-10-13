@@ -28,8 +28,9 @@ note: some models had to be zipped in order to commit them on github (.gz) unzip
 
 There are four major sections (notebooks aka solutions):
 
-1. Python pandas and scypy and SciKit Learn: typeform-ml_case-pandas_sklearn-data.ipynb
+### 1. Python pandas and scypy and SciKit Learn
 
+- Notebook: typeform-ml_case-pandas_sklearn-data.ipynb
 - Reading the dataframe "typeform.csv"
 - Data cleaning and calculating completion_rate
 - Exploratory analysis
@@ -42,21 +43,20 @@ The resulting model is in the models folder.
 - Random forest validation MAE =  2.9240913766587613
 
 
-2. SciKit Learn Pipeline: typeform-ml_case-prototype.ipynb
+### 2. SciKit Learn Pipeline: 
 
-SKlearn Pipeline prototype with SciKit Learn Pipeline ready to deploy
+- Notebook: typeform-ml_case-prototype.ipynb
+- SKlearn Pipeline prototype 
 
-The current pipeline is thouhgt to be ran on a AWS EMR communicating via endponts (as a service) being able to scale as much as you need. (caviat: now it runs reading a file from the filesystem but it's final integration should be with messaging or real-time sqs queues subbscription)
+The current pipeline is thouhgt to be ran on a AWS Docker, SNS, SQS communicating via endponts (as a service) being able to scale as much as you need. (caviat: now it runs reading a file from the filesystem but it's final integration should be with messaging or real-time sqs queues subbscription)
 
 There are three processes:
 - Data Processing: where we clean the original dataframe.
 - Re-traing: Uses gridsearch for hyperparmeter tunning.
 - Prediction: Reads the features and the model and does a prediction.
 
-All it's been integrated on a sample docker container (see prototype folder)
 
-
-3. Keras Deep Nerural Network: typeform-ml_case-neural_network.ipynb
+### 3. Keras Deep Nerural Network: typeform-ml_case-neural_network.ipynb
 
 - Define a sequential model and add some dense layers
 - Use ‘relu’ as the activation function for the hidden layers
@@ -67,7 +67,7 @@ The resulting model is in the checkpoints folder: Weights-009--2.13214.hdf5
 It is the better performming model with MAE: 2.1487201872250994
 
  
-4. PySpark (without pipelines): typeform-ml_case-pyspark.ipynb
+#### 4. PySpark (without pipelines): typeform-ml_case-pyspark.ipynb
 
 Here we perform the data cleaning and model fitting using an spark standalone install. Unfortunately, on the last step, the model training, the spark pipeline breaks.
 
@@ -98,7 +98,17 @@ The .yaml file definition for the REST Api is stored in the <api> folder.
 
 When considering a deployment architecture we have to take into account:
 
-A common ML pipeline is 
+A common ML pipeline, as the one used in this case, usually, has the following steps:
+- Data collection
+- Data processing and cleaning
+- Then it forks in model re-training and model prediction.
+- Finally we need to monitor the degradation of our model so we can retrain.
+
+Of course all the infrastructure has 
+
+
+
+Pipelines for NLP or image processing with RNN are a little bit different there're not the focus of our case.
 
 ### typeform : deployment achitecture: without spark
 
@@ -110,6 +120,8 @@ A common ML pipeline is
 Another way to do it can be
 
 ### typeform : deployment achitecture: monitoring system
+
+
 
 ## typeform : prototype (built on sections 2 and 3)
 
