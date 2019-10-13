@@ -1,4 +1,4 @@
-# typeform : machine learning case : description∫
+# typeform : machine learning case 
 
 Create a model to predict the completion rate (defined as submissions/views ) of a form given the features in the dataset.
 
@@ -124,8 +124,11 @@ Here we are presenting three posible solutions:
 
 ### typeform : deployment achitecture: without spark
 
-Using Amazon Elastic Container services we can build docker images that scale to our needs.
-On. 
+Using Amazon Elastic Container services we can build docker images that scale to our needs. Then, connecting then to topics via AWS SNS and SQS we can build from scratch a "prediction service".
+
+![alt text](https://github.com/DavidQuer/typeform/blob/master/images/aws-sns-sqs-docker.png "")
+
+The problem with this solution is that needs a lot of development and monitoring so you are building everithing from ground up.
 
 
 ### typeform : deployment achitecture: with spark
@@ -152,7 +155,7 @@ For this monitoring we can use a couple of setups:
 - Docker container monitoring with **Datadog**
 - Custom made logging system in a time series database and **Grafana** for visualization.
 
-![alt text](https://github.com/DavidQuer/typeform/blob/master/images/ml_pipeline_diagram.png "")
+![alt text](https://github.com/DavidQuer/typeform/blob/master/images/datadog.png "")
 
 ## typeform : prototype (built on sections 2 and 3)
 
