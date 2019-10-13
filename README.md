@@ -67,7 +67,7 @@ The resulting model is in the checkpoints folder: Weights-009--2.13214.hdf5
 It is the better performming model with MAE: 2.1487201872250994
 
  
-#### 4. PySpark (without pipelines): typeform-ml_case-pyspark.ipynb
+### 4. PySpark (without pipelines): typeform-ml_case-pyspark.ipynb
 
 Here we perform the data cleaning and model fitting using an spark standalone install. Unfortunately, on the last step, the model training, the spark pipeline breaks.
 
@@ -92,23 +92,39 @@ paths:
       ...
 ```
 
-The .yaml file definition for the REST Api is stored in the <api> folder.
+The .yaml file definition for the REST Api is stored in the **api** folder.
 
 ## typeform : deployment architecture (for the pipeline)
 
 When considering a deployment architecture we have to take into account:
+- Do we have a datalake infraestructure, distributed filesystem and map reduce framework?
+- Are we using some kind datawarehouse where we can store pre calculated Features?
+- Is the prediction of our model Bacth or Real-time, or both and we have a Lambda or Delta Architecture?
+
 
 A common ML pipeline, as the one used in this case, usually, has the following steps:
 - Data collection
 - Data processing and cleaning
-- Then it forks in model re-training and model prediction.
-- Finally we need to monitor the degradation of our model so we can retrain.
+- Feature extraction
+- Then it forks in 
+-- model re-training and model prediction.
+-- model
+- Support for A/B testing experiments.
+- Support for monitoring performace and model degradation
 
-Of course all the infrastructure has 
+Of course all the general modules of such infrastructures are:
 
+![alt text](https://github.com/DavidQuer/typeform/blob/master/images/ml_pipeline_diagram.png "")
 
 
 Pipelines for NLP or image processing with RNN are a little bit different there're not the focus of our case.
+
+About the metrics that we could include in our monitoring system are:
+
+- Response time
+- Thoroughput (predictions per secon)
+- Uptime and reliability
+- MAE or other prediction error measure (to be able to compare different versions)
 
 ### typeform : deployment achitecture: without spark
 
