@@ -1,0 +1,37 @@
+openapi: 3.0.0
+info:
+  title: ML_case API
+  description: API definition for.
+  version: 0.1.9
+servers:
+  - url: http://api.mlcase.com/v1
+    description: endpoint definition for the API
+paths:
+  /retrain:
+    get:
+      summary: Returns the S3 url with the retrained model.
+      description: Retrains the model with the "datalake" or file data.
+      responses:
+        '200':    # status code
+          description: A JSON with a param S3 especifiying the model destination
+          content:
+            application/json:
+              schema: 
+                type: application/json
+                  s3: string # s3 url with the model
+                  version: string # model's version 
+  /predict:
+    post:
+      summary: Predicts with the actual model based on the payload features.
+      requestBody:
+        content:
+          application/json:
+            schema:      # request body contents
+              type: object
+              properties:
+                features:
+                  type: string # formatted (0.0-0.0-0.1-0.9....)
+      responses:
+        '200':
+          description: OK
+          value: float # 10.25 - the actual prediction
