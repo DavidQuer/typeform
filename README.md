@@ -157,5 +157,13 @@ For this monitoring we can use a couple of setups:
 
 ![alt text](https://github.com/DavidQuer/typeform/blob/master/images/datadog.png "")
 
-## typeform : prototype (built on sections 2 and 3)
+## typeform : references
+
+There are many references used in this project, here are some of them:
+
+[1] "Python machine learning 2nd edition", Sebastian Raschka
+[2] "Feature engineering for machine learning" Alice Zheng
+[3] "Sklearn's Pipeline Constructor", github post
+[4] AWS documentation site.
+
 
