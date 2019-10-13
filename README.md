@@ -100,15 +100,13 @@ When considering a deployment architecture we have to take into account:
 - Do we have a datalake infraestructure, distributed filesystem and map reduce framework?
 - Are we using some kind datawarehouse where we can store pre calculated Features?
 - Is the prediction of our model Bacth or Real-time, or both and we have a Lambda or Delta Architecture?
-
+- Is going to be human intervention in the retraining of the models?
 
 A common ML pipeline, as the one used in this case, usually, has the following steps:
 - Data collection
 - Data processing and cleaning
 - Feature extraction
-- Then it forks in 
--- model re-training and model prediction.
--- model
+- Model prediction (and retraining if needed)
 - Support for A/B testing experiments.
 - Support for monitoring performace and model degradation
 
@@ -119,6 +117,30 @@ Of course all the general modules of such infrastructures are:
 
 Pipelines for NLP or image processing with RNN are a little bit different there're not the focus of our case.
 
+Here we are presenting three posible solutions:
+- Classic Event Drivent development Architecture.
+- Classic ML HDFS-Spark lambda architecture.
+- Third party soultion like Amazon SageMaker
+
+### typeform : deployment achitecture: without spark
+
+Using Amazon Elastic Container services we can build docker images that scale to our needs.
+On. 
+
+
+### typeform : deployment achitecture: with spark
+
+Depending on batch or real-time setup we could use **Airflow** as a spark job launcher.
+
+
+### typeform : deployment achitecture: third party solution
+
+Another way to do it can be to externalize all datascience and analytics infraestructure to a service like AWS SageMaker.
+
+https://aws.amazon.com/es/sagemaker/
+
+### typeform : deployment achitecture: monitoring system
+
 About the metrics that we could include in our monitoring system are:
 
 - Response time
@@ -126,18 +148,11 @@ About the metrics that we could include in our monitoring system are:
 - Uptime and reliability
 - MAE or other prediction error measure (to be able to compare different versions)
 
-### typeform : deployment achitecture: without spark
+For this monitoring we can use a couple of setups:
+- Docker container monitoring with **Datadog**
+- Custom made logging system in a time series database and **Grafana** for visualization.
 
-
-### typeform : deployment achitecture: with spark
-
-### typeform : deployment achitecture: third party solution
-
-Another way to do it can be
-
-### typeform : deployment achitecture: monitoring system
-
-
+![alt text](https://github.com/DavidQuer/typeform/blob/master/images/ml_pipeline_diagram.png "")
 
 ## typeform : prototype (built on sections 2 and 3)
 
